@@ -1,0 +1,7 @@
+numpy
+torch
+rasterio
+scipy
+pyproj
+matplotlib
+gradio==4.44.7
