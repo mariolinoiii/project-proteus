@@ -1,4 +1,4 @@
-# Project Proteus · Mapping of Suspected Marine Oil Slicks with SAR & GeoAI
+# Project Proteus · Mapping of Suspected Oil Slicks with SAR & GeoAI
 
 Project Proteus is a research and educational prototype for detecting and mapping **suspected marine oil slicks** from Synthetic Aperture Radar (SAR) imagery using physics‑based pseudo‑labeling and a custom convolutional neural network, **ProteusSegNet**.
 
