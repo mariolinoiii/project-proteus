@@ -76,5 +76,6 @@ gradio==4.44.7
 
 ## Author
 
-**Mariolino Daniel III Julabar y Gonzales**  
-Associate Member, Royal Aeronautical Society (AMRAeS)
+**Mariolino Daniel III Julabar**  
+**AlReem Saeed**  
+**Sultan AlShehhi**  
