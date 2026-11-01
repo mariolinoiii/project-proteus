@@ -1,101 +1,102 @@
-# Project Proteus
+# Project Proteus — Google Colab Notebook
 
-**Project Proteus** maps suspected marine oil slicks using Synthetic Aperture Radar (SAR) imagery, local ESA WorldCover reference data, and a custom ProteusSegNet deep-learning model.
+Mapping suspected oil slicks using Synthetic Aperture Radar (SAR) imagery, local ESA WorldCover reference data, and ProteusSegNet.
 
-The project was developed as part of the National Space Academy 2026 Earth Observation Application Development Course.
+This README describes `ProteusSegNet.ipynb` only. The local Python application is separate and is located in the `desktop_app/` folder.
 
-## Project overview
+## Overview
 
-Project Proteus uses a hybrid workflow that combines:
+Project Proteus is a research and educational prototype for mapping suspected oil slicks.
 
-- Calibrated, single-band SAR imagery in dB
-- Local ESA WorldCover water-reference data
-- SAR backscatter and local-contrast analysis
-- A custom convolutional encoder-decoder model, ProteusSegNet
-- Physics-based filtering to reduce false detections
+The notebook combines:
 
-The application produces suspected-oil masks, object-level statistics, analytical figures, and downloadable result packages.
+- Local WorldCover water-reference masking
+- SAR backscatter thresholds and local-contrast analysis
+- A custom ProteusSegNet convolutional encoder-decoder model
+- Physics-based filtering of model predictions
+- Object-level statistics, maps, and downloadable results
 
-## Project versions
+Outputs indicate suspected oil, not confirmed oil spills.
 
-This repository contains two versions of Project Proteus:
+## Main notebook
 
-| Version | File | Purpose |
-|---|---|---|
-| Google Colab notebook | `ProteusSegNet.ipynb` | Interactive browser-based application |
-| Python desktop application | `app.py` | Local Windows/Mac desktop application |
+[View ProteusSegNet.ipynb](ProteusSegNet.ipynb)
 
-## Main Colab notebook
+[Open in Google Colab](https://colab.research.google.com/github/mariolinoiii/project-proteus/blob/main/ProteusSegNet.ipynb)
 
-The main Google Colab notebook is:
+If the repository is private, you must have repository access and authorize Colab to access private GitHub repositories.
 
-[ProteusSegNet.ipynb](ProteusSegNet.ipynb)
+## What you need
 
-### How to run the Colab notebook
+For analysis, prepare:
+
+1. A calibrated, georeferenced, single-band SAR GeoTIFF expressed in dB.
+2. The matching local ESA WorldCover 2021 reference GeoTIFF files.
+3. A compatible trained ProteusSegNet checkpoint, normally named `proteusmodel.pt`.
+
+Keep the original WorldCover filenames unchanged.
+
+Model weights and input imagery are not embedded in the notebook.
+
+## How to run an analysis
 
 1. Open `ProteusSegNet.ipynb` in Google Colab.
 2. Connect to a runtime.
-3. Run the notebook cells from top to bottom.
-4. Upload the required SAR GeoTIFF and matching local ESA WorldCover GeoTIFF files.
-5. Upload a trained model checkpoint, if available.
-6. Run the analysis and download the generated results package.
+3. Select **Runtime → Run all**.
+4. Wait for the application interface to appear.
+5. Sign in using the application credentials provided separately by the project maintainer.
+6. Open the **Analysis Workspace** tab.
+7. Upload your SAR GeoTIFF.
+8. Upload the matching WorldCover reference files.
+9. Upload your compatible trained model checkpoint.
+10. Review the processing settings.
+11. Select **Execute analysis**.
+12. Review the report and analytical figures.
+13. Download the analysis ZIP using the control beneath the figures.
 
-## Python desktop application
+CPU is the default processing option.
 
-The desktop application can be run locally using Python.
+In a fresh Colab runtime, upload the model checkpoint again. If the default checkpoint already exists in the current runtime, the model upload field may be left empty.
 
-### How to run the desktop application
+## Optional dataset preparation and training
 
-1. Install Python 3.10 or newer.
-2. Open a terminal or command prompt in the project folder.
-3. Install the desktop requirements:
+Training is not required when you already have a compatible checkpoint.
 
-```bash
-pip install -r requirements-desktop.txt
-```
+To train a new model:
 
-4. Run the application:
+1. Open **Dataset Preparation**.
+2. Upload the training SAR images and matching WorldCover reference files.
+3. Select **Prepare annotated dataset**.
+4. Review the dataset preparation report.
+5. Open **Model Training**.
+6. Set the number of training epochs.
+7. Confirm that you authorize training and replacement of the default checkpoint.
+8. Select **Start model training**.
+9. Download the resulting `proteusmodel.pt` checkpoint.
 
-```bash
-python proteus_app.py
-```
+Save any existing checkpoint before training: the default checkpoint may be overwritten.
 
-5. Open the local Gradio link shown in the terminal.
+The training labels are generated using SAR physics rules. They are pseudo-labels, not independently verified oil-spill annotations.
 
-## Input data
+## Analysis outputs
 
-Both versions accept:
+The analysis ZIP can contain:
 
-- A calibrated, georeferenced, single-band SAR GeoTIFF expressed in dB.
-- Matching local ESA WorldCover 2021 GeoTIFF reference tiles.
-- An optional trained ProteusSegNet checkpoint saved as `proteusmodel.pt`.
+- Suspected-oil label raster
+- Model score raster
+- Oil-object ID raster
+- Object statistics in CSV format
+- Object polygons in GeoJSON format
+- Processing report in JSON format
+- SAR and suspected-oil preview maps
+- Backscatter distribution histogram
+- Object area and contrast figure
 
-The maximum supported SAR input size is 16 million pixels.
+The trained model checkpoint is downloaded separately from the **Model Training** tab, not from the analysis ZIP.
 
-## Outputs
+## Notebook requirements
 
-After processing, the application can generate:
-
-- Suspected-oil label masks
-- Model score rasters
-- Oil object IDs
-- Object-level CSV statistics
-- GeoJSON polygons
-- Analytical figures
-- A downloadable ZIP results package
-
-## Requirements
-
-This repository has two requirements files:
-
-| File | Used for |
-|---|---|
-| `requirements.txt` | Google Colab notebook |
-| `requirements-desktop.txt` | Local Python desktop application |
-
-### Colab notebook requirements
-
-`requirements.txt` contains:
+The root-level `requirements.txt` is for this notebook:
 
 ```text
 numpy
@@ -107,30 +108,46 @@ matplotlib
 gradio==4.44.7
 ```
 
-### Desktop application requirements
+The notebook includes a setup cell that installs missing libraries.
 
-`requirements-desktop.txt` contains:
+The desktop application has its own requirements file:
 
 ```text
-numpy>=1.26,<3
-torch>=2.6,<3
-rasterio>=1.3,<2
-scipy>=1.11,<2
-pyproj>=3.6,<4
-matplotlib>=3.8,<4
-gradio>=5,<6
+desktop_app/requirements.txt
 ```
 
-The Colab notebook uses Gradio 4.44.7, while the desktop application uses Gradio 5.
+Do not combine the notebook and desktop requirements into one installation environment.
 
-## Important notes
+## Limitations
 
-- The application identifies **suspected oil**, not confirmed oil spills.
-- Model scores and confidence categories are not calibrated probabilities.
-- Independent validation has not yet been completed.
-- Do not publish the notebook publicly without removing any authentication credentials.
+- Maximum SAR input size: 16,000,000 pixels per image.
+- Automatic splitting of oversized scenes and merging of outputs are not implemented.
+- Independent validation has not been completed.
+- Training-image results are demonstrations, not independent accuracy tests.
+- Model scores are not calibrated probabilities of oil.
+- Object confidence categories are heuristic.
+- WorldCover water classes are not specifically marine-water classes.
+- Missing reference coverage remains excluded.
+- Area estimates depend on coordinate-system geometry and are not confirmed spill measurements.
+- Processing and large embedded downloads may require substantial runtime and browser memory.
 
-## Author
+ProteusSegNet is a custom convolutional encoder-decoder with skip connections. It is not an implementation of the published SegNet architecture.
+
+## Security
+
+Do not publish passwords, API keys, or other credentials in notebook code, saved outputs, or documentation.
+
+Keep authentication credentials outside the committed notebook and share them separately with authorized users.
+
+## Separate desktop application
+
+The local Python application and its Windows setup scripts are located in:
+
+[desktop_app/](desktop_app/)
+
+Use the instructions and requirements inside that folder for the desktop version. This README covers the Colab notebook only.
+
+## Developer
 
 **Mariolino Daniel III Julabar**  
 **AlReem Saeed**  
