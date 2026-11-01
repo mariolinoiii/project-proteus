@@ -23,7 +23,7 @@ This repository contains two versions of Project Proteus:
 | Version | File | Purpose |
 |---|---|---|
 | Google Colab notebook | `ProteusSegNet.ipynb` | Interactive browser-based application |
-| Python desktop application | `proteus_app.py` | Local Windows/Mac desktop application |
+| Python desktop application | `app.py` | Local Windows/Mac desktop application |
 
 ## Main Colab notebook
 
