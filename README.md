@@ -2,7 +2,7 @@
 
 Project Proteus is a research and educational prototype for detecting and mapping **suspected marine oil slicks** from Synthetic Aperture Radar (SAR) imagery using physics‑based pseudo‑labeling and a custom convolutional neural network, **ProteusSegNet**.
 
-The project was developed in the context of the **GEM No.2 oil spill** as part of the **Space Academy 2026 – Earth Observation Application Development Course (Level‑2)**.
+The project was developed in the context of the **GEM No.2 oil spill** as part of the **National Space Academy 2026 – Earth Observation Application Development Course (Level‑2)**.
 
 > **Important:** Outputs indicate _suspected_ oil, not confirmed oil spills.  
 > Labels are derived from SAR physics heuristics and ESA WorldCover reference data, not from human‑annotated ground truth.
