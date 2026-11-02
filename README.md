@@ -417,6 +417,14 @@ Workflow:
 
 ---
 
+## AI-assisted Development
+
+ChatGPT, Gemini in Google Colab, gIQ AI Assistant, and Perplexity were used to support research, code development, debugging, and documentation.
+
+**Team Proteus** made all project decisions, reviewed the implementation, conducted testing, and finalized the code. Responsibility for the submitted work and its interpretation remains with the team.
+
+---
+
 ## Project Leadership and Contributions
 
 ### Original Developer and Project Lead
@@ -439,14 +447,6 @@ GitHub: [@mariolinoiii](https://github.com/mariolinoiii)
 2. **Sultan AlShehhi**
 
 Individual contributions and responsibilities will be documented as the project develops.
-
----
-
-## AI-assisted Development
-
-ChatGPT, Gemini in Google Colab, gIQ AI Assistant, and Perplexity were used to support research, code development, debugging, and documentation.
-
-**Team Proteus** made all project decisions, reviewed the implementation, conducted testing, and finalized the code. Responsibility for the submitted work and its interpretation remains with the team.
 
 ---
 
