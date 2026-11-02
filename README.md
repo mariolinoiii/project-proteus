@@ -431,6 +431,7 @@ GitHub: [@mariolinoiii](https://github.com/mariolinoiii)
   - ProteusSegNet model and pipeline
   - Google Colab / Gradio notebook application
   - Standalone Python desktop application
+- Set up the GitHub repository and uploaded the Google Colab notebook and standalone Python application
 
 ### Additional Team Members
 
