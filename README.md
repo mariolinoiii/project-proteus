@@ -446,3 +446,10 @@ Individual contributions and responsibilities will be documented as the project 
 ChatGPT, Gemini in Google Colab, gIQ AI Assistant, and Perplexity were used to support research, code development, debugging, and documentation.
 
 **Team Proteus** made all project decisions, reviewed the implementation, conducted testing, and finalized the code. Responsibility for the submitted work and its interpretation remains with the team.
+
+---
+
+### Acknowledgments
+
+We thank Dr. Vincent Markiet for his feedback and encouragement
+during the development of Project Proteus.
