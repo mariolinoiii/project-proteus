@@ -1766,7 +1766,7 @@ def build_app():
                     refs = gr.File(label="Optional WorldCover uploads — cached files are reused", file_count="multiple", file_types=[".tif",".tiff"], type="filepath")
                     checkpoint = gr.File(label="Optional model upload — defaults to models/proteus_model.pt", file_types=[".pt"], type="filepath")
                 with gr.Column():
-                    mode = gr.Radio(list(OPERATIONAL_MODES), value="Balanced", label="Operational sensitivity")
+                    mode = gr.Radio(list(OPERATIONAL_MODES), value="Balanced", label="Detection sensitivity")
                     threshold = gr.Slider(-35,-10,value=-25,step=0.5,label="Base backscatter threshold (dB)")
                     score = gr.Slider(0.05,0.95,value=0.5,step=0.05,label="Model score threshold")
                     zero = gr.Checkbox(value=True,label="Exclude zero-valued SAR pixels")
@@ -1784,7 +1784,7 @@ def build_app():
             gr.Markdown("## Automatic pseudo-label generation")
             sar_set = gr.File(label="SAR GeoTIFFs",file_count="multiple",file_types=[".tif",".tiff"],type="filepath")
             refs_set = gr.File(label="Optional WorldCover files — leave empty to use cache",file_count="multiple",file_types=[".tif",".tiff"],type="filepath")
-            mode_set = gr.Radio(list(OPERATIONAL_MODES),value="Balanced",label="Operational sensitivity")
+            mode_set = gr.Radio(list(OPERATIONAL_MODES),value="Balanced",label="Pseudo-label sensitivity")
             threshold_set = gr.Slider(-35,-10,value=-25,step=0.5,label="Base threshold (dB)")
             zero_set = gr.Checkbox(value=True,label="Exclude zero-valued SAR pixels")
             prepare = gr.Button("Prepare annotated dataset",variant="primary")
