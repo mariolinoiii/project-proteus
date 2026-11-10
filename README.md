@@ -496,16 +496,15 @@ project-proteus/
 │       ├── SAR_20261027_Subset-2.zip
 │       └── ESA_WorldCover_10m_2021_v200_N24E054_Map.zip
 ├── results/
-│   └── Proteus_results_20261027_Conservative_score0.8/
-│       ├── backscatter_histogram.png
-│       ├── model_scores.tif
-│       ├── object_statistics.png
-│       ├── oil_object_ids.tif
-│       ├── oil_objects.csv
-│       ├── oil_objects.geojson
-│       ├── oil_preview.png
-│       ├── report.json
-│       └── suspected_oil_labels.tif
+│   └── backscatter_histogram.png
+│   └── model_scores.tif
+│   └── object_statistics.png
+│   └── oil_object_ids.tif
+│   └── oil_objects.csv
+│   └── oil_objects.geojson
+│   └── oil_preview.png
+│   └── report.json
+│   └── suspected_oil_labels.tif
 ├── desktop_app/
 │   ├── app.py                              # Windows desktop entry point (Gradio/GUI)
 │   ├── requirements.txt                    # Desktop-specific dependencies
