@@ -380,15 +380,14 @@ This repository now includes **sample input data** and a **reproducible example 
 - `data/sample_input/`  
   - `SAR_20261027_Subset-2.zip`  
     - Contains a subset SAR scene `SAR_20261027_Subset-2` (single‑band, calibrated in dB).  
-  - `ESA_WorldCover_10m_2021_v200_N24E054_Map.zip`  
-    - Contains the matching WorldCover tile `ESA_WorldCover_10m_2021_v200_N24E054_Map.tif`.  
+  - `ESA_WorldCover_10m_2021_v200_N24E054_Map.tif`  
 
 You can unzip these archives and use the contained files as **inputs** to Proteus in either Colab or the Windows app.
 
 ### `results/` – Example Output
 
-- `results/Proteus_results_20261027_Conservative_score0.8/`  
-  Contains a complete output set generated from the sample input using:
+- `results/`  
+  Contains a complete output set generated from the 27 October scene sample input using:
   - Mode: **Conservative**  
   - Model score threshold: **0.8**
 
