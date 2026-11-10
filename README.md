@@ -17,26 +17,6 @@ The project was developed around the **GEM No.2 oil spill** case study as part o
 
 **Team Proteus**
 
-- **Mariolino Daniel III Julabar** – Project lead & primary developer (SAR processing, ProteusSegNe```markdown
-# Project Proteus — ProteusSegNet Application  
-### Mapping Suspected Marine Oil Slicks Using SAR & GeoAI
-
-Project Proteus is a research and educational prototype that detects and maps **suspected marine oil slicks** in Synthetic Aperture Radar (SAR) imagery using:
-
-- **SAR physics–based pseudo‑labelling**, and  
-- A custom convolutional neural network, **ProteusSegNet**.
-
-The project was developed around the **GEM No.2 oil spill** case study as part of the **National Space Academy 2026 – Earth Observation Application Development (Level 2)** course.
-
-> ⚠ **Important:** All outputs indicate **suspected** oil, not confirmed spills.  
-> Labels are derived from SAR heuristics and ESA WorldCover reference data, not human‑annotated ground truth.
-
----
-
-## Team & Roles
-
-**Team Proteus**
-
 - **Mariolino Daniel III Julabar** – Project lead & primary developer (SAR processing, ProteusSegNet design, app implementation)  
 - **AlReem AlRowahi** – Application design, testing, and analysis support  
 - **Sultan AlShehhi** – Application design, testing, and analysis support  
