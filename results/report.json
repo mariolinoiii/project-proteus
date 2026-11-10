@@ -1,0 +1,36 @@
+{
+  "project": "Project Proteus: Mapping of Suspected Oil Slicks using SAR & GeoAI",
+  "source_filename": "SAR_20261027_Subset-2.tif",
+  "model": "ProteusSegNet",
+  "device": "cpu",
+  "mode": "Conservative",
+  "threshold_db": -27.0,
+  "contrast_min": 0.15,
+  "growth_allowance_db": 1.0,
+  "model_threshold": 0.8,
+  "estimated_oil_area_km2": 238.79401281570622,
+  "selected_oil_pixels": 2660867,
+  "evaluated_water_pixels": 5143633,
+  "excluded_pixels": 6307367,
+  "object_summary": {
+    "num_objects": 1019,
+    "num_high_confidence": 26,
+    "num_medium_confidence": 105,
+    "num_low_confidence": 888,
+    "num_unknown_confidence": 0
+  },
+  "reference_files": [
+    "ESA_WorldCover_10m_2021_v200_N24E054_Map.tif"
+  ],
+  "limitations": [
+    "Trained using physics-generated pseudo-labels.",
+    "Independent validation has not been completed.",
+    "Model scores are not calibrated oil probabilities.",
+    "Confidence classes are heuristic, not verified certainty."
+  ],
+  "processing": {
+    "strategy": "full scene (in memory)",
+    "scene_pixels": 11451000,
+    "runtime_seconds": 15.2
+  }
+}
