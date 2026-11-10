@@ -4,4 +4,4 @@ rasterio
 scipy
 pyproj
 matplotlib
-gradio==4.44.7
+gradio>=5
