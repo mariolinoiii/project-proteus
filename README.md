@@ -439,7 +439,7 @@ These outputs demonstrate the expected structure and content of a Proteus analys
   - `backscatter_histogram.png`  
   - `object_statistics.png`  
 
-See `results/Proteus_results_20261027_Conservative_score0.8/` for a concrete example.
+See `results/` for a concrete example.
 
 ### Typical Results (Qualitative)
 
