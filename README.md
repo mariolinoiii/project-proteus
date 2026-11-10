@@ -1,4 +1,3 @@
-```markdown
 # Project Proteus — ProteusSegNet Application  
 ### Mapping Suspected Marine Oil Slicks Using SAR & GeoAI
 
@@ -504,4 +503,3 @@ The project made use of AI tools (e.g., ChatGPT, Gemini, gIQ AI Assistant, Perpl
 All architectural choices, final code, and interpretation remain the responsibility of **Team Proteus**.
 
 ---
-```
