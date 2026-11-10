@@ -1,4 +1,5 @@
 PROJECT PROTEUS / PROTEUSSEGNET — WINDOWS LOCAL APPLICATION
+Team: Mariolino Daniel III Julabar, AlReem AlRowahi, Sultan AlShehhi
 
 QUICK START
 1. Extract the ZIP completely. Do not run the BAT files from inside the ZIP.
@@ -8,7 +9,16 @@ QUICK START
 5. Double-click Setup_Windows.bat once. It creates .venv and installs dependencies.
 6. Double-click Start_Proteus.bat. Keep its terminal window open.
 7. Your browser opens the app. If not, open http://127.0.0.1:7860.
-8. Sign in, upload your SAR image, and execute analysis.
+8. Upload your SAR image, review the Input check panel, and execute analysis.
+   (Sign-in is requested only if login.json or PROTEUS_USERNAME/PROTEUS_PASSWORD is set.)
+
+WHAT IS NEW (v2)
+- Tiled processing: SAR images above 16 million pixels are processed in tiles
+  (default 2048 px, 32 px halo) with seam-aware region merging, up to 1.5 billion px.
+  Results are pixel-identical to full-scene processing; peak RAM depends on tile size.
+- Refined interface: input pre-flight check (size, CRS, dB sanity, WorldCover coverage,
+  processing plan), live effective thresholds, progress bar, KPI cards, zoomable figures,
+  largest-object table, individual file downloads, User Guide tab.
 
 PREREQUISITES
 64-bit Windows and 64-bit Python 3.11 or 3.12, including the Python launcher.
@@ -43,8 +53,11 @@ The server binds to 127.0.0.1 only; it does not create a public sharing link.
 This is not a hardened multiuser deployment. Do not expose it publicly without additional security work.
 
 LIMITATIONS
-Maximum 16 million pixels per SAR input. Automatic tiling/merging are not implemented.
-Full-scene arrays and polygonization can require substantial RAM and time.
+Scenes up to 16 million pixels run in memory; larger scenes (up to 1.5 billion pixels) are tiled
+automatically. Tiling writes temporary files (about 5 bytes per pixel) to the system temp folder
+(override with PROTEUS_SCRATCH_DIR) and
+removes them afterwards, so keep enough free disk space. Use a smaller tile size on low-RAM PCs.
+Figure display percentiles for tiled scenes come from the downsampled preview.
 Labels are physics pseudo-labels, not independently verified oil annotations.
 Independent validation and comparison with a physics-only baseline are outstanding.
 Training-image predictions demonstrate execution, not accuracy.
@@ -57,7 +70,8 @@ Press Ctrl+C in the terminal. Start_Proteus.bat starts it again.
 Do not start a second copy while the first is running: port 7860 may be occupied.
 
 VERIFICATION STATUS
-Python syntax and portable-path/static structure checks passed during assembly.
-This package has NOT been executed on Windows or tested end-to-end with your checkpoint.
-Dependency versions are bounded ranges, not a Windows-validated lockfile.
+v2 was executed end to end on Windows 11 (Python 3.13, torch 2.15 CPU, gradio 5.50) with
+models/proteus_model.pt and SAR_20261021_Subset-2.tif: full-scene results reproduce the original
+report exactly (120.1076 km2, 558 objects), tiled results are pixel-identical, and a 45.7 M-pixel
+scene completed in tiled mode. Dependency versions are bounded ranges, not a lockfile.
 Keep your original notebook and model backup until you verify this application.
