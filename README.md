@@ -25,6 +25,38 @@ Advisory and feedback: **Dr. Vincent Markiet** (National Space Academy EO facult
 
 ---
 
+## Alignment with UN SDGs & UN Water Conference 2026
+
+Project Proteus was developed **in anticipation of the UN Water Conference in Abu Dhabi in December 2026**, as a demonstration of how Earth Observation and GeoAI can support evidence‑based water and marine‑environment governance.
+
+The project contributes to several **UN Sustainable Development Goals (SDGs)**:
+
+- **SDG 14 – Life Below Water**
+  - Early identification of **suspected marine oil slicks** supports efforts to:
+    - Protect marine ecosystems from pollution
+    - Inform response and monitoring strategies
+    - Improve situational awareness for coastal and offshore management
+
+- **SDG 6 – Clean Water and Sanitation**
+  - Although focused on the marine environment, Proteus showcases:
+    - How EO data can be used for **water‑quality–related surveillance**
+    - The role of satellite monitoring in protecting water resources from hazardous discharges
+
+- **SDG 13 – Climate Action**
+  - Oil spills interact with climate‑driven changes in currents, storms and coastal vulnerability.
+  - Systematic satellite monitoring of marine pollution supports:
+    - **Climate‑resilient coastal management**
+    - Integration of EO data in climate risk assessments and adaptation planning
+
+- **SDG 9 – Industry, Innovation and Infrastructure**
+  - The project demonstrates:
+    - A **novel SAR + GeoAI workflow** for maritime monitoring
+    - How open EO data and custom models can be integrated into analytic infrastructure and future operational services
+
+Project Proteus is not an operational system, but a **prototype** illustrating how satellite data and GeoAI can underpin SDG‑aligned monitoring and inform discussions at events such as the **UN Water Conference 2026 in Abu Dhabi**.
+
+---
+
 ## Problem, Intended Users & Supported Decisions
 
 ### Problem
@@ -227,12 +259,23 @@ You can run Proteus in two main ways:
 4. **Wait for the Gradio app**
 
    - The final cell launches a Gradio web UI inside Colab, with authentication.
-   - **Important:** The notebook currently includes example credentials in the last cell.  
-     **Change or remove these before publishing the repository or sharing the notebook.**
+   - In this repository’s notebook, authentication is configured as:
+     ```python
+     proteus_app.launch(
+         share=True,
+         inline=True,
+         prevent_thread_lock=True,
+         auth=("poseidon", "n5@202613v3!2"),
+         ...
+     )
+     ```
+   - These credentials are **demo credentials for this course prototype** only.  
+     Do not reuse this username/password pair for any other system.
 
 5. **Sign in to the app**
 
-   - Use the credentials configured in the last cell (do not commit real passwords to GitHub).
+   - Username: `poseidon`  
+   - Password: `n5@202613v3!2`
 
 6. **Upload inputs (Analysis Workspace tab)**
 
@@ -483,11 +526,8 @@ Planned work (roadmap):
 
 ## Security & Data Handling
 
-- Do **not** commit:
-  - Real usernames/passwords
-  - API keys or other secrets
-- The Colab notebook’s last cell includes example credentials for Gradio auth:
-  - Change or remove these before publishing or sharing.
+- Do **not** reuse the demo Gradio credentials (`poseidon` / `n5@202613v3!2`) for any other system.
+- Do **not** commit personal or production usernames/passwords or API keys.
 - All processing occurs on user‑supplied SAR and WorldCover files; the repository does not distribute imagery.
 
 ---
