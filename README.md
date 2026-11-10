@@ -1,5 +1,6 @@
+```markdown
 # Project Proteus — ProteusSegNet Application  
-### Mapping of Suspected Marine Oil Slicks Using SAR & GeoAI
+### Mapping Suspected Marine Oil Slicks Using SAR & GeoAI
 
 Project Proteus is a research and educational prototype that detects and maps **suspected marine oil slicks** in Synthetic Aperture Radar (SAR) imagery using:
 
@@ -165,6 +166,30 @@ Other key parameters:
 
 ---
 
+## Requirements
+
+### Notebook (`ProteusSegNet.ipynb`)
+
+A minimal environment sufficient for the notebook:
+
+```text
+numpy
+torch
+rasterio
+scipy
+pyproj
+matplotlib
+gradio>=5
+```
+
+The notebook includes a setup cell that installs missing libraries when run in Google Colab.
+
+### Desktop Application
+
+The desktop app uses its own environment (see `desktop_app/requirements.txt`).
+
+---
+
 ## Installation & How to Run
 
 You can run Proteus in two main ways:
@@ -293,6 +318,26 @@ Then:
 5. Review results and export rasters, vectors, and reports.
 
 > The desktop app does not require Colab or an internet connection, but you must supply local SAR and WorldCover data.
+
+---
+
+> **Note on sample data and example outputs**
+>
+> The course specification recommends including:
+> - `data/sample_input/` (or a download script with exact data identifiers), and  
+> - `results/` with a reproducible example output.
+>
+> For Project Proteus, the SAR and WorldCover GeoTIFFs used in the GEM No.2 case study are **much larger than 25 MB** and cannot be committed to this GitHub repository without exceeding recommended size limits. In addition, some Earth Observation products have distribution and licence constraints.
+>
+> Because of this:
+> - The repository **does not include** `data/sample_input/` or a scripted download of the original scenes.
+> - The repository **does not include** a full `results/` folder with example rasters for those scenes.
+>
+> Instead, this README and the notebook describe:
+> - The **required data types** (single‑band SAR in dB + ESA WorldCover tiles), and  
+> - The **expected outputs** (labels, scores, object IDs, GeoJSON, CSV, figures),
+>
+> so that you can run the notebook or app on your **own SAR + WorldCover data** and obtain the same types of products.
 
 ---
 
@@ -459,3 +504,4 @@ The project made use of AI tools (e.g., ChatGPT, Gemini, gIQ AI Assistant, Perpl
 All architectural choices, final code, and interpretation remain the responsibility of **Team Proteus**.
 
 ---
+```
