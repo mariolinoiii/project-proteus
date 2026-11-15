@@ -560,7 +560,7 @@ Planned work (roadmap):
 
 ## AI‑Assisted Development
 
-The project made use of AI tools (e.g., ChatGPT, Gemini, gIQ AI Assistant, Perplexity) for:
+The project made use of AI tools (e.g., ChatGPT, Claude, Gemini, gIQ AI Assistant, Perplexity) for:
 
 - Code generation and refactoring  
 - Debugging and performance improvements (e.g., tiled processing)  
