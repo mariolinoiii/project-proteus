@@ -18,8 +18,8 @@ The project was developed around the **GEM No.2 oil spill** case study as part o
 **Team Proteus**
 
 - **Mariolino Daniel III Julabar** – Project lead & primary developer (SAR processing, ProteusSegNet design, app implementation)  
-- **AlReem AlRowahi** – Application design, testing, and analysis support  
-- **Sultan AlShehhi** – Application design, testing, and analysis support  
+- **AlReem AlRowahi** – Project design, testing, and analysis support  
+- **Sultan AlShehhi** – TBD  
 
 Advisory and feedback: **Dr. Vincent Markiet** (National Space Academy EO faculty).
 
