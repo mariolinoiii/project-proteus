@@ -494,7 +494,7 @@ project-proteus/
 │   ├── ProteusSegNet_Demonstration.pdf     # Demonstration case description
 │   └── sample_input/
 │       ├── SAR_20261027_Subset-2.zip
-│       └── ESA_WorldCover_10m_2021_v200_N24E054_Map.zip
+│       └── ESA_WorldCover_10m_2021_v200_N24E054_Map.tif
 ├── results/
 │   └── backscatter_histogram.png
 │   └── model_scores.tif
