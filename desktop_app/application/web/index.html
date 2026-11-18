@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Project Proteus v3</title><link href="/static/style.css" rel="stylesheet"/></head>
+<body>
+<aside class="side">
+<div class="brand"><span aria-label="ProteusSegNet" class="wordmark"><span class="w1">Proteus</span><span class="w2">SegNet</span></span><span aria-hidden="true" class="mini">PS</span><small>v3 · research prototype</small></div>
+<nav id="nav">
+<button class="on" data-view="analysis"><i>◎</i><span>Analysis Workspace</span></button>
+<button data-view="training"><i>∿</i><span>Model Training</span></button>
+<button data-view="dataset"><i>▦</i><span>Dataset Preparation</span></button>
+<button data-view="project"><i>✦</i><span>Project Proteus</span></button>
+</nav>
+<div class="side-foot">
+<button class="ghost" id="fs">⛶ <span>Presentation view</span></button>
+<button class="ghost" id="quit">⏻ <span>Close application</span></button>
+</div>
+</aside>
+<main>
+<header class="top">
+<div><h1 id="title">Analysis Workspace</h1><p id="sub"></p></div>
+<div class="chips"><span class="chip" id="chipDev">Device…</span><span class="chip" id="chipModel">Model…</span><span class="chip" id="chipDs">Dataset…</span></div>
+</header>
+<div class="notice"><b>Suspected oil only.</b> Detections are not confirmed spills, and independent validation has not been completed.</div>
+<div class="jobbar hidden" id="jobbar">
+<div class="jt"><span class="pulse" id="jpulse"></span><b id="jkind"></b><span id="jmsg"></span><span class="grow"></span><span class="muted" id="jdev"></span><span class="muted" id="jtime"></span><b id="jpct"></b><button class="x" id="jclose" title="Dismiss">×</button></div>
+<div class="bar"><i id="jfill"></i></div><pre id="jlog"></pre>
+</div>
+<div class="err hidden" id="err"></div>
+<section class="view on" id="v-analysis">
+<div class="grid2">
+<div class="col">
+<div class="card"><h3><span class="n">1</span>SAR scene</h3>
+<div class="row"><select id="aSar"></select><label class="btn sec">Upload GeoTIFF<input accept=".tif,.tiff" hidden="" id="aSarUp" type="file"/></label></div>
+<div class="inspect muted" id="aInspect">Choose a calibrated, single-band dB GeoTIFF with a CRS.</div></div>
+<div class="card"><h3><span class="n">2</span>WorldCover reference</h3>
+<div class="seg" id="aRef"><button class="on" data-v="local">Local upload</button><button data-v="online">Online</button></div>
+<div class="row" id="aRefLocal"><label class="btn sec">Upload tile(s)<input accept=".tif,.tiff" hidden="" id="aRefUp" multiple="" type="file"/></label><span class="muted small" id="aRefInfo"></span></div>
+<p class="muted small hidden" id="aRefOnline">The required 3° × 3° tiles are downloaded from the public ESA AWS bucket and cached. Only tile identifiers are sent; SAR pixels and weights stay on this machine.</p></div>
+<div class="card"><h3><span class="n">3</span>Model</h3>
+<div class="muted" id="aModel">…</div>
+<details><summary>Advanced: custom checkpoint</summary><p class="muted small">Load only checkpoints you trust.</p><div class="row"><select id="aOverride"></select><label class="btn sec">Upload .pt<input accept=".pt" hidden="" id="aModelUp" type="file"/></label></div></details></div>
+</div>
+<div class="col">
+<div class="card"><h3><span class="n">4</span>Parameters</h3>
+<div class="form">
+<label>Sensitivity<select id="aMode"><option>Conservative</option><option selected="">Balanced</option><option>Sensitive</option></select></label>
+<label>Base seed threshold <output id="aBaseO">−25 dB</output><input id="aBase" max="-10" min="-35" step="0.5" type="range" value="-25"/></label>
+<div class="eff" id="aEff"></div>
+<label>Model score threshold <output id="aMtO">0.50</output><input id="aMt" max="0.95" min="0.05" step="0.05" type="range" value="0.5"/></label>
+<label>Processing<select id="aStrat"><option>Auto</option><option>Always tiled</option><option>Full scene</option></select></label>
+<label>Tile size<select id="aTile"><option>1024</option><option selected="">2048</option><option>4096</option></select></label>
+<label class="chk"><input checked="" id="aZero" type="checkbox"/> Exclude zero-valued pixels</label>
+<div><span class="lbl">Compute device</span><div class="seg" id="aDev"><button class="on" data-v="Auto">Auto</button><button data-v="GPU">GPU</button><button data-v="CPU">CPU</button></div><div class="muted small" id="aDevNote"></div></div>
+</div>
+<button class="btn pri wide" id="aRun">Run analysis</button></div>
+</div>
+</div>
+<div class="hidden" id="aOut">
+<div class="kpis" id="aKpi"></div>
+<div class="card"><h3>Figures</h3><div class="figs" id="aFigs"></div></div>
+<div class="card"><h3>Ten largest objects</h3><div class="tw"><table id="aTab"></table></div></div>
+<div class="card dl"><h3>Export</h3><a class="btn pri" id="dlZip">Download Complete Analysis ZIP</a><a class="btn sec" id="dlPdf">Download Analysis Report (PDF)</a>
+<p class="muted small grow">The ZIP includes Cloud Optimized GeoTIFFs in the scene's native CRS and WGS84 GeoJSON, ready for GIS platforms such as gIQ. See README_GIS.txt inside.</p></div>
+</div>
+</section>
+<section class="view" id="v-training">
+<div class="grid2"><div class="col"><div class="card"><h3>Training source</h3><div class="muted" id="tDs"></div><button class="btn sec hidden" id="tGo">Go to Dataset Preparation</button></div>
+<div class="card"><h3>Model</h3><div class="muted" id="tCk"></div></div></div>
+<div class="col"><div class="card"><h3>Settings</h3><div class="form">
+<div><span class="lbl">Compute device</span><div class="seg" id="tDev"><button class="on" data-v="Auto">Auto</button><button data-v="GPU">GPU</button><button data-v="CPU">CPU</button></div><div class="muted small" id="tDevNote"></div></div>
+<label>Epochs <output id="tEpO">5</output><input id="tEp" max="1000" min="1" type="range" value="5"/></label></div>
+<p class="muted small">Training starts from random weights on the pseudo-labels and updates the default model, which Analysis Workspace then uses automatically. Back up important weights first.</p>
+<button class="btn pri wide" id="tRun">Start training</button></div></div></div>
+<div class="hidden card" id="tOut"><h3>Training result</h3>
+<div class="trainout"><img alt="Training loss by epoch" class="fig" id="tFig"/><div><div class="kpis stack" id="tKpi"></div><a class="btn sec" href="/api/checkpoint">Download checkpoint</a></div></div>
+<p class="muted small">Loss measures fit to the pseudo-labels, not independent accuracy.</p></div>
+</section>
+<section class="view" id="v-dataset">
+<div class="grid2"><div class="col">
+<div class="card"><h3><span class="n">1</span>SAR scenes</h3>
+<div class="row"><label class="btn sec">Upload GeoTIFF(s)<input accept=".tif,.tiff" hidden="" id="dSarUp" multiple="" type="file"/></label>
+<button class="btn sec" id="dAll">Select all</button><button class="btn sec" id="dNone">Clear</button><span class="muted small" id="dCount"></span></div>
+<div class="checks" id="dScenes"></div></div>
+<div class="card"><h3><span class="n">2</span>WorldCover reference</h3>
+<div class="seg" id="dRef"><button class="on" data-v="local">Local upload</button><button data-v="online">Online</button></div>
+<div class="row" id="dRefLocal"><label class="btn sec">Upload tile(s)<input accept=".tif,.tiff" hidden="" id="dRefUp" multiple="" type="file"/></label><span class="muted small" id="dRefInfo"></span></div>
+<p class="muted small hidden" id="dRefOnline">Tiles for every selected scene are downloaded and shared with the Analysis Workspace cache.</p></div></div>
+<div class="col"><div class="card"><h3><span class="n">3</span>Labelling</h3>
+<div class="form">
+<label>Sensitivity<select id="dMode"><option>Conservative</option><option selected="">Balanced</option><option>Sensitive</option></select></label>
+<label>Base seed threshold <output id="dBaseO">−25 dB</output><input id="dBase" max="-10" min="-35" step="0.5" type="range" value="-25"/></label>
+<label>Processing<select id="dStrat"><option>Auto</option><option>Always tiled</option><option>Full scene</option></select></label>
+<label>Tile size<select id="dTile"><option>1024</option><option selected="">2048</option><option>4096</option></select></label>
+<label class="chk"><input checked="" id="dZero" type="checkbox"/> Exclude zero-valued pixels</label></div>
+<p class="muted small">Physics pseudo-labelling runs on the CPU. The prepared dataset feeds Model Training directly.</p>
+<button class="btn pri wide" id="dRun">Prepare dataset</button></div></div></div>
+<div class="hidden" id="dOut">
+<div class="card"><div class="row between"><h3>Scene review</h3><select class="auto" id="dSel"></select></div><div class="kpis" id="dKpi"></div>
+<div class="figs four" id="dFigs"></div></div>
+<div class="card"><h3>WorldCover and labelling graphs</h3><div class="figs one" id="dCharts"></div>
+<p class="muted small">Previews use a bounded display grid and never alter the training rasters. Label counts come from the full-resolution raster; WorldCover shares are sampled.</p></div>
+<a class="btn pri wide" href="/api/dataset/zip" id="dDl">Download Dataset</a>
+</div>
+</section>
+<section class="view" id="v-project">
+<div class="card"><h2>Mapping of Suspected Oil Slicks using SAR &amp; GeoAI</h2>
+<p>ProteusSegNet is an integrated workspace for screening SAR imagery for suspected oil slicks. It combines dataset preparation, model training and scene analysis in one workflow, built around a custom convolutional segmentation network.</p>
+<p class="muted">Developed around the GEM No.2 case study for the National Space Academy 2026 Earth Observation Application Development (Level 2) course, in anticipation of the 2026 UN Water Conference in Abu Dhabi. Thematic alignment includes SDGs 14, 6, 13 and 9. No government endorsement or operational certification is implied.</p></div>
+<div class="card"><h3>Team Proteus</h3><div class="tw"><table><tr><th>Member</th><th>Role</th><th>Contribution</th></tr>
+<tr><td>Mariolino Daniel III Julabar</td><td>Project Lead &amp; Primary Developer</td><td>SAR processing, network architecture and application implementation</td></tr>
+<tr><td>AlReem AlRowahi</td><td>Project design, testing and analytical support</td><td>Design, Testing &amp; Analysis Support</td></tr>
+<tr><td>Sultan AlShehhi</td><td>Project analysis support</td><td>Analysis Support</td></tr></table></div>
+<p class="small"><b>Faculty Advisor:</b> Dr. Vincent Markiet, Space42.</p>
+<p class="muted small">AI tools supported code generation, refactoring, debugging and documentation. Team Proteus remains responsible for architectural choices, final code and interpretation.</p></div><section class="card"><h2>From SAR to analyst review</h2><p>Screening workflow — not spill confirmation.</p><ol><li><strong>Upload SAR:</strong> calibrated, single-band backscatter in dB with a CRS.</li><li><strong>Align WorldCover:</strong> identify reference water; exclude unknown coverage.</li><li><strong>Prepare labels:</strong> generate physics-based suspected-oil pseudo-labels.</li><li><strong>Train ProteusSegNet:</strong> fit the segmentation network to those labels.</li><li><strong>Analyse:</strong> apply the physics criteria and model-score threshold.</li><li><strong>Review and export:</strong> inspect candidates, figures, PDF and GIS products.</li></ol><p>Water (blue) · Suspected oil (amber) · Excluded/unknown (grey) · SAR intensity (greyscale).</p><p><strong>Suspected oil only. Not a confirmed spill. Independent validation has not been completed.</strong></p></section>
+<div class="grid2"><div class="card"><h3>Scope and limits</h3><ul class="plain"><li>Helps locate candidate features and prioritise them for visual review.</li><li>Does not confirm spills, attribute vessels, establish offences or quantify environmental harm.</li><li>Look-alikes (low wind, biogenic films, rain) can resemble oil, and model scores are not probabilities.</li></ul></div>
+<div class="card"><h3>Attribution</h3><p class="small">© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium. WorldCover 2021 v200, CC BY 4.0.</p>
+<p class="small"><a href="https://doi.org/10.5281/zenodo.7254221" rel="noopener" target="_blank">WorldCover DOI</a> · <a href="https://esa-worldcover.org/en/data-access" rel="noopener" target="_blank">Data access</a> · <a href="https://dataspace.copernicus.eu/" rel="noopener" target="_blank">Copernicus Data Space</a></p></div></div>
+<div class="card"><h3>System diagnostics</h3><pre class="diag" id="diag">Loading…</pre></div>
+</section>
+</main>
+<script src="/static/app.js"></script></body></html>
