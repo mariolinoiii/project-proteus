@@ -203,19 +203,27 @@ Other key parameters:
 
 ### Notebook (`ProteusSegNet.ipynb`)
 
-A minimal environment sufficient for the notebook:
+The root `requirements.txt` pins the notebook’s direct dependencies for a **Python 3.12** environment:
 
 ```text
-numpy
-torch
-rasterio
-scipy
-pyproj
-matplotlib
-gradio>=5
+numpy==2.2.6
+torch==2.7.1
+rasterio==1.4.3
+scipy==1.15.3
+pyproj==3.7.1
+matplotlib==3.10.3
+gradio==5.49.1
 ```
 
-The notebook includes a setup cell that installs missing libraries when run in Google Colab.
+These pins define the intended notebook environment, not a verified record of the original demonstration runtime.
+
+The notebook’s setup cell installs missing libraries only; it does **not** enforce these versions when libraries are already installed. To apply the pinned requirements, upload the root `requirements.txt` to Colab and run this in a separate cell **before running the application cells**:
+
+```python
+%pip install -r /content/requirements.txt
+```
+
+Restart the Colab session after installation, then run the notebook. Check that the selected runtime uses Python 3.12; the desktop Python 3.14 environment is separate.
 
 ### Desktop Application
 
@@ -237,7 +245,7 @@ You can run Proteus in two main ways:
 - Google account  
 - Modern browser  
 - Colab runtime (CPU is sufficient; GPU (e.g. T4) optional)  
-- Python version managed by Colab (Python 3.x)  
+- **Python 3.12** for the pinned notebook environment; Python is managed by Colab  
 
 #### Steps
 
@@ -251,12 +259,23 @@ You can run Proteus in two main ways:
 
    - In Colab: `Runtime → Change runtime type → Python 3`  
      GPU (`T4`) is optional.
+   - Check the Python version:
+     ```python
+     import sys
+     print(sys.version)
+     ```
+   - The pinned requirements target Python 3.12. If Colab provides a different version, use a compatible runtime before applying these pins.
 
-3. **Run the notebook**
+3. **Install requirements and run the notebook**
 
-   - In Colab: `Runtime → Run all`  
-   - The setup cell installs any missing libraries:
-     - `numpy`, `torch`, `rasterio`, `scipy`, `pyproj`, `matplotlib`, `gradio>=5`
+   - Upload the repository’s root `requirements.txt` to `/content/`.
+   - Before running the application cells, run:
+     ```python
+     %pip install -r /content/requirements.txt
+     ```
+   - Restart the Colab session after installation.
+   - Select `Runtime → Run all`.
+   - The notebook’s existing setup cell installs missing libraries only; updating `requirements.txt` alone does not change that cell’s behaviour.
 
 4. **Wait for the Gradio app**
 
@@ -473,7 +492,7 @@ See `results/` for a concrete example.
 ```text
 project-proteus/
 ├── ProteusSegNet.ipynb                     # Main Google Colab + Gradio application
-├── requirements.txt                        # Notebook environment requirements
+├── requirements.txt                        # Pinned notebook dependencies (Python 3.12)
 ├── data/
 │   ├── ProteusSegNet_Data_Acquisition.pdf  # Data acquisition document
 │   ├── ProteusSegNet_Demonstration.pdf     # Demonstration case description
