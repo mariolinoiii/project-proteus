@@ -1,7 +1,10 @@
-numpy
-torch
-rasterio
-scipy
-pyproj
-matplotlib
-gradio>=5
+# ProteusSegNet.ipynb — Colab / notebook dependencies
+# Target environment: Python 3.12
+
+numpy==2.2.6
+torch==2.7.1
+rasterio==1.4.3
+scipy==1.15.3
+pyproj==3.7.1
+matplotlib==3.10.3
+gradio==5.49.1
